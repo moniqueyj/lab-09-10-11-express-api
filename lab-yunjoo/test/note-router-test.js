@@ -22,6 +22,7 @@ describe('testing module note-router', function(){
   after((done) => {
     if(server.isRunning){
       server.close(() =>{
+        server.isRunning = false;
         console.log('shutdown the server');
         done();
       });
