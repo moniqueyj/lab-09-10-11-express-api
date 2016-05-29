@@ -31,18 +31,30 @@ describe('testing module note-router', function(){
     done();
   });
   describe('testong POST/api/note', function(){
-    after((done)=>{
-      storage.pool = {};
-      done();
-    });
-    it('should return a note', function(done){
-      request.post(baseUrl)
-      .send({content:'test note'})
-      .end((err, res) =>{
-        expect(res.status).to.equal(200);
-        expect(res.body.content).to.equal('test note');
-        expect(!!res.body.id);
+    describe('with body {content:"test note"}', function(){
+      after((done)=>{
+        storage.pool = {};
         done();
+      });
+      it('should return a note', function(done){
+        request.post(baseUrl)
+        .send({content:'test note'})
+        .end((err, res) =>{
+          expect(res.status).to.equal(200);
+          expect(res.body.content).to.equal('test note');
+          expect(!!res.body.id);
+          done();
+        });
+      });
+    });
+    describe('with no body', function(){
+      it('should return a note', function(done){
+        request.post(baseUrl)
+        .end((err, res) =>{
+          expect(res.status).to.equal(400);
+          expect(res.text).to.equal('bad request');
+          done();
+        });
       });
     });
   });

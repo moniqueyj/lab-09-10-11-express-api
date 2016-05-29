@@ -32,15 +32,15 @@ describe('testing modules storage', function(){
       }).catch(done);
     });
   });
-  describe('testing module putItem', function(){
-    before((done) =>{
-      storage.pool.unicorn = {'321':{id:321, name:'sluggacorn'}};
-      done();
-    });
-    after((done)=>{
-      
-    })
-  })
+  // describe('testing module putItem', function(){
+  //   before((done) =>{
+  //     storage.pool.unicorn = {'321':{id:321, name:'sluggacorn'}};
+  //     done();
+  //   });
+  //   after((done)=>{
+  //
+  //   });
+  // });
   describe('testing module deleteItem', function(){
     before((done) => {
       storage.pool.unicorn = {'321': {id:321, name: 'sluggacorn'}};

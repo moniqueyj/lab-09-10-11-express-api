@@ -25,7 +25,7 @@ function createNote(reqBody){
   });
 }
 
-noteRouter.post('/',function(req,res){
+noteRouter.post('/',bodyParser,function(req,res){
   debug('hit endpoint /api/note POST');
   createNote(req.body).then(function(note){
     res.status(200).json(note);
@@ -38,6 +38,23 @@ noteRouter.post('/',function(req,res){
     res.status(500).send('interal server error');
   });
 });
+// function exampleMiddleWare(req,res,next){
+//console.log('hello world');
+//}
+// noteRouter.post('/',bodyParser,exampleMiddleWare,function(req,res, next){
+//   debug('hit endpoint /api/note POST');
+//   createNote(req.body).then(function(note){
+//     res.status(200).json(note);
+//   }).catch(function(err){
+//     console.error(err.message);
+//     if(AppError.isAppError(err)){
+//       res.status(err.statusCode).send(err.responseMessage);
+//       return;
+//     }
+//     res.status(500).send('interal server error');
+//     next();
+//   });
+// });
 
 noteRouter.get('/:id', function(req, res){
   storage.fetchItem('note', req.params.id).then(function(note){
