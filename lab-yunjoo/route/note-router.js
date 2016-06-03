@@ -68,8 +68,8 @@ noteRouter.get('/:id', function(req, res){
   });
 });
 
-noteRouter.put('/', bodyParser, function(req,res){
-  storage.putItem('note', req.params.id).then(function(note){
+noteRouter.put('/:id', bodyParser, function(req,res){
+  storage.putItem('note', req.params.id, req.body).then(function(note){
     res.status(200).json(note);
   }).catch(function(err){
     console.error(err.message);

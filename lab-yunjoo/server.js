@@ -2,11 +2,11 @@
 
 const debug = require('debug')('note:server');
 const express = require('express');
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 const noteRouter = require('./route/note-router');
 const port = process.env.PORT || 3000;
 const app = express();
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 app.use('/api/note',noteRouter);
 app.all('*', function(req, res){
   debug('* 404');

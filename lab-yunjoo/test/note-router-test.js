@@ -5,7 +5,7 @@ const server = require('../server');
 const storage = require('../lib/storage');
 const Note = require('../model/note');
 const port = process.env.PORT || 3000;
-const baseUrl = 'localhost:${port}/api/note';
+const baseUrl = `localhost:${port}/api/note`;
 
 describe('testing module note-router', function(){
   before((done)=>{
@@ -69,7 +69,7 @@ describe('testing module note-router', function(){
       done();
     });
     it('should return a note',(done) =>{
-      request.get('${baseUrl}/${this.tempNote.id}')
+      request.get(`${baseUrl}/${this.tempNote.id}`)
       .end((err, res) => {
         expect(res.status).to.equal(200);
         expect(res.body.content).to.equal(this.tempNote.content);
