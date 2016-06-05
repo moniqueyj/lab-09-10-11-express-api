@@ -9,12 +9,17 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "body-parser": "^1.15.1",
     "chai": "^3.5.0",
     "debug": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^2.0.0",
+    "gulp-mocha": "^2.2.0",
+    "superagent": "^2.0.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.1",
     "express": "^4.13.4",
-    "mocha": "^2.5.3",
-    "node-uuid": "^1.4.7",
-    "superagent": "^2.0.0-alpha.3"
+    "morgan": "^1.7.0",
+    "node-uuid": "^1.4.7"
   }
 }

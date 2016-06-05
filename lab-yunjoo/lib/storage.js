@@ -34,15 +34,24 @@ exports.fetchItem = function(schema, id){
 exports.putItem = function(schema, id, item){
   debug('updateItem');
   return new Promise((resolve, reject) => {
+    if(!id){
+      var err = AppError.error400('bad request');
+      return reject(err);
+    }
     if(!this.pool[schema]){
-      var err = AppError.error404('storage schema not found');
+      err = AppError.error404('storage schema not found');
       return reject(err);
     }
     if(!this.pool[schema][id]){
       err = AppError.error400('storage setItem require id');
       return reject(err);
     }
-    this.pool[schema][id].content = item.content;
+    if(item.content){
+      this.pool[schema][id].content = item.content;
+    } else {
+      err = AppError.error400('bad request');
+      return reject(err);
+    }
     resolve(this.pool[schema][id]);
   });
 };

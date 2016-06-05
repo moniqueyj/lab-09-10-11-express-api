@@ -3,7 +3,7 @@
 const Router = require('express').Router;
 const noteRouter = module.exports = new Router();
 const debug = require('debug')('note:note-router');
-const AppError = require('../lib/app-error');
+const sendError = require('../lib/error-response');
 const storage = require('../lib/storage');
 const Note = require('../model/note');
 const bodyParser = require('body-parser').json();
@@ -25,69 +25,35 @@ function createNote(reqBody){
   });
 }
 
-noteRouter.post('/',bodyParser,function(req,res){
+noteRouter.post('/',bodyParser, sendError, function(req,res){
   debug('hit endpoint /api/note POST');
   createNote(req.body).then(function(note){
     res.status(200).json(note);
   }).catch(function(err){
-    console.error(err.message);
-    if(AppError.isAppError(err)){
-      res.status(err.statusCode).send(err.responseMessage);
-      return;
-    }
-    res.status(500).send('interal server error');
+    res.sendError(err);
   });
 });
-// function exampleMiddleWare(req,res,next){
-//console.log('hello world');
-//}
-// noteRouter.post('/',bodyParser,exampleMiddleWare,function(req,res, next){
-//   debug('hit endpoint /api/note POST');
-//   createNote(req.body).then(function(note){
-//     res.status(200).json(note);
-//   }).catch(function(err){
-//     console.error(err.message);
-//     if(AppError.isAppError(err)){
-//       res.status(err.statusCode).send(err.responseMessage);
-//       return;
-//     }
-//     res.status(500).send('interal server error');
-//     next();
-//   });
-// });
 
-noteRouter.get('/:id', function(req, res){
+noteRouter.get('/:id', sendError,function(req, res){
   storage.fetchItem('note', req.params.id).then(function(note){
     res.status(200).json(note);
   }).catch(function(err){
-    console.error(err.message);
-    if(AppError.isAppError(err)){
-      res.status(err.statusCode).send(err.responseMessage);
-    }
-    res.status(500).send('interal server error');
+    res.sendError(err);
   });
 });
 
-noteRouter.put('/:id', bodyParser, function(req,res){
+noteRouter.put('/:id', bodyParser, sendError,function(req,res){
   storage.putItem('note', req.params.id, req.body).then(function(note){
     res.status(200).json(note);
   }).catch(function(err){
-    console.error(err.message);
-    if(AppError.isAppError(err)){
-      res.status(err.statusCode).send(err.responseMessage);
-      return;
-    }
-    res.status(500).send('interal server error');
+    res.sendError(err);
   });
 });
-noteRouter.delete('/:id', function(req, res){
+
+noteRouter.delete('/:id', sendError, function(req, res){
   storage.deleteItem('note', req.params.id).then(function(note){
     res.status(200).json(note);
   }).catch(function(err){
-    console.err(err.message);
-    if(AppError.isAppError(err)){
-      res.status(err.statusCode).send(err.responseMessage);
-    }
-    res.status(500).send('interal server error');
+    res.sendError(err);
   });
 });
