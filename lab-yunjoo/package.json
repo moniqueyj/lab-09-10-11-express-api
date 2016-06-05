@@ -2,19 +2,29 @@
   "name": "lab-yunjoo",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/mocha/bin/mocha"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "body-parser": "^1.15.1",
     "chai": "^3.5.0",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^2.0.0",
+    "gulp-mocha": "^2.2.0",
+    "gulp-nodemon": "^2.0.7",
+    "mocha": "^2.5.3",
+    "superagent": "^2.0.0-alpha.3"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.0",
+    "body-parser": "^1.15.1",
     "debug": "^2.2.0",
     "express": "^4.13.4",
-    "mocha": "^2.5.3",
-    "node-uuid": "^1.4.7",
-    "superagent": "^2.0.0-alpha.3"
+    "mongoose": "^4.4.19",
+    "morgan": "^1.7.0",
+    "superagent-promise-plugin": "^3.2.0",
+    "superagent-use": "0.0.1"
   }
 }

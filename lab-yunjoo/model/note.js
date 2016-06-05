@@ -1,13 +1,11 @@
 'use strict';
 
-const uuid = require('node-uuid');
-const debug = require('debug')('note:note');
-const AppError = require('../lib/app-error');
+const mongoose = require('mongoose');
 
-module.exports = function(content){
-  debug('creating note');
-  if(!content) throw AppError.error400('note constructor require content');
-  this.id = uuid.v1();
-  this.content  = content;
-  this.timestamp = new Date();
-};
+const noteSchema = mongoose.Schema({
+  name:{ type: String, require: true},
+  timestamp: {type:Date, required: true},
+  content:{type: String, required: true}
+});
+
+module.exports = mongoose.model('note', noteSchema);
