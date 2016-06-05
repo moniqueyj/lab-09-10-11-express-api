@@ -50,6 +50,7 @@ describe('testing module note-router', function(){
   describe('with no body', function(){
     it('should return a note', function(done){
       request.post(baseUrl)
+      .send({})
       .end((err, res) =>{
         expect(res.status).to.equal(400);
         expect(res.text).to.equal('bad request');

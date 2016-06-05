@@ -15,7 +15,7 @@ function createNote(reqBody){
     try {
       note = new Note(reqBody.content);
     } catch (err){
-      reject(err);
+      return reject(err);
     }
     storage.setItem('note', note).then(function(note){
       resolve(note);
