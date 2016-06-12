@@ -8,6 +8,7 @@ const storage = require('../lib/storage');
 const Note = require('../model/note');
 const bodyParser = require('body-parser').json();
 
+//create data
 function createNote(reqBody){
   debug('createNote');
   return new Promise(function(resolve, reject){

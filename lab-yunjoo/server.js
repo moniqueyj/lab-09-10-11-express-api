@@ -1,9 +1,11 @@
 'use strict';
-
+//npm module
 const debug = require('debug')('note:server');
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+
+//app module
 const sendError = require('./lib/error-response');
 const AppError = require('./lib/app-error');
 const noteRouter = require('./route/note-router');
