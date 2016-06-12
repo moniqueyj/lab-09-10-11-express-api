@@ -25,6 +25,7 @@ exports.fetchItem = function(schema, id){
       return reject(err);
     }
     if(!this.pool[schema][id]){
+      err = AppError.error404('storage id not found PRINGLES');
       return reject(err);
     }
     resolve(this.pool[schema][id]);
@@ -64,6 +65,7 @@ exports.deleteItem = function(schema, id){
       return reject(err);
     }
     if(!this.pool[schema][id]){
+      err = AppError.error404('storage ID not found');
       return reject(err);
     }
     delete this.pool[schema][id];

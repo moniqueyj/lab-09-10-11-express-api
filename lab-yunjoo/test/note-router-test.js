@@ -12,7 +12,6 @@ describe('testing module note-router', function(){
     if (!server.isRunning){
       server.listen(port, () => {
         server.isRunning = true;
-        console.log('server running on port', port);
         done();
       });
       return;
@@ -23,7 +22,6 @@ describe('testing module note-router', function(){
     if(server.isRunning){
       server.close(() =>{
         server.isRunning = false;
-        console.log('shutdown the server');
         done();
       });
       return;
@@ -62,7 +60,6 @@ describe('testing module note-router', function(){
     before((done) => {
       this.tempNote = new Note('test data');
       storage.setItem('note', this.tempNote);
-      console.log(this.tempNote);
       done();
     });
     after((done) => {
@@ -79,7 +76,6 @@ describe('testing module note-router', function(){
       });
     });
     it('should return a error', (done) => {
-      console.log(this.tempNote.id);
       request.put(`${baseUrl}/${this.tempNote.id}`)
       .send({})
       .end((err,res) => {
